@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="dist/styles.css" rel="stylesheet">
+    <link href="dist/style.css" rel="stylesheet">
     <title>Edit Artikel</title>
 </head>
 <body class="bg-gray-100">

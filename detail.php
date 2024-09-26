@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="dist/styles.css" rel="stylesheet">
+    <link href="dist/style.css" rel="stylesheet">
     <title>Detail Artikel</title>
 </head>
 <body class="bg-gray-100">

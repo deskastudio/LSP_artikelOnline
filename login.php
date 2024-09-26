@@ -1,38 +1,44 @@
 <?php
 session_start();
-if (isset($_SESSION['username'])) {
-    header("Location: admin.php");
-    exit();
-}
-
 include 'koneksi.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $username, $password);
+    // Ambil password dari database (teks biasa)
+    $stmt = $conn->prepare("SELECT password FROM admin WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->bind_result($stored_password);
+    $stmt->fetch();
+    $stmt->close();
 
-    if ($result->num_rows > 0) {
+    // Hash password yang dimasukkan user
+    $hashedInputPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Periksa apakah password yang diinputkan cocok dengan password yang disimpan
+    if ($password === $stored_password) {
+        // Password cocok, login berhasil
         $_SESSION['username'] = $username;
         header("Location: admin.php");
         exit();
     } else {
-        $error = "Username atau password salah.";
+        // Password salah
+        echo "Password salah.";
     }
 }
+
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="dist/styles.css" rel="stylesheet">
+    <link href="dist/style.css" rel="stylesheet">
     <title>Login Admin</title>
 </head>
 <body class="bg-gray-100">
@@ -55,8 +61,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 </html>
-
-<?php
-$stmt->close();
-$conn->close();
-?>
