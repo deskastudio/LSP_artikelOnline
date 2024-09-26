@@ -23,12 +23,14 @@ if ($result->num_rows > 0) {
     <link href="dist/style.css" rel="stylesheet">
     <title>Detail Artikel</title>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4"><?php echo $artikel['judul']; ?></h1>
-        <img src="uploads/<?php echo $artikel['foto']; ?>" alt="<?php echo $artikel['judul']; ?>" class="w-64 h-64 object-cover mb-2">
-        <p><?php echo $artikel['deskripsi']; ?></p>
-        <a href="index.php" class="text-blue-500">Kembali ke Daftar Artikel</a>
+<body class="bg-gradient-to-r from-green-400 to-blue-500">
+    <div class="container mx-auto p-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4"><?php echo $artikel['judul']; ?></h1>
+            <img src="uploads/<?php echo $artikel['foto']; ?>" alt="<?php echo $artikel['judul']; ?>" class="w-full h-64 object-cover rounded-lg mb-4">
+            <p class="text-gray-700 mb-6"><?php echo $artikel['deskripsi']; ?></p>
+            <a href="index.php" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200">Kembali ke Daftar Artikel</a>
+        </div>
     </div>
 </body>
 </html>

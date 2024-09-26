@@ -14,9 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->fetch();
     $stmt->close();
 
-    // Hash password yang dimasukkan user
-    $hashedInputPassword = password_hash($password, PASSWORD_DEFAULT);
-
     // Periksa apakah password yang diinputkan cocok dengan password yang disimpan
     if ($password === $stored_password) {
         // Password cocok, login berhasil
@@ -25,38 +22,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         // Password salah
-        echo "Password salah.";
+        $error = "Password atau username salah.";
     }
 }
 
 $conn->close();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="dist/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Login Admin</title>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Login Admin</h1>
+<body class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center">
+    <div class="container max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Login Admin</h1>
+
         <?php if (isset($error)): ?>
-            <div class="bg-red-200 text-red-800 p-2 mb-4"><?php echo $error; ?></div>
+            <div class="bg-red-200 text-red-800 p-2 mb-4 rounded-md"><?php echo $error; ?></div>
         <?php endif; ?>
+
         <form method="POST">
-            <div class="mb-4">
-                <label for="username" class="block">Username</label>
-                <input type="text" name="username" id="username" required class="border p-2 w-full">
+            <div class="mb-6">
+                <label for="username" class="block text-gray-700 font-semibold">Username</label>
+                <input type="text" name="username" id="username" required class="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
             </div>
-            <div class="mb-4">
-                <label for="password" class="block">Password</label>
-                <input type="password" name="password" id="password" required class="border p-2 w-full">
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700 font-semibold">Password</label>
+                <input type="password" name="password" id="password" required class="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
             </div>
-            <button type="submit" class="bg-blue-500 text-white p-2">Login</button>
+            <div class="text-center">
+                <button type="submit" class="bg-purple-500 text-white py-3 px-6 rounded-md hover:bg-purple-600 transition-transform transform hover:scale-105">Login</button>
+            </div>
         </form>
     </div>
 </body>
