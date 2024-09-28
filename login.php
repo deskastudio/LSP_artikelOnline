@@ -16,12 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Periksa apakah password yang diinputkan cocok dengan password yang disimpan
     if ($password === $stored_password) {
-        // Password cocok, login berhasil
         $_SESSION['username'] = $username;
         header("Location: admin.php");
         exit();
     } else {
-        // Password salah
         $error = "Password atau username salah.";
     }
 }

@@ -22,26 +22,6 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Halaman Admin</title>
-    <style>
-        /* CSS untuk modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-        }
-    </style>
 </head>
 <body class="bg-gradient-to-r from-purple-400 to-blue-500 min-h-screen flex items-center justify-center">
     <div class="container mx-auto p-8 bg-white rounded-lg shadow-lg">
@@ -75,8 +55,7 @@ $result = $stmt->get_result();
                                 <td class="py-3 px-6 border-b">
                                     <img src="uploads/<?php echo $row['foto']; ?>" 
                                          alt="<?php echo $row['judul']; ?>" 
-                                         class="rounded-full object-cover cursor-pointer"
-                                         onclick="openModal('uploads/<?php echo $row['foto']; ?>')" width="50">
+                                         class="rounded-full object-cover cursor-pointer" width="50">
                                 </td>
                                 <td class="py-3 px-6 border-b">
                                     <a href="edit.php?id_artikel=<?php echo $row['id_artikel']; ?>" class="text-blue-500 hover:text-blue-700">Edit</a>
@@ -111,26 +90,6 @@ $result = $stmt->get_result();
             <a href="logout.php" class="text-red-500 hover:text-red-700 text-lg font-semibold">Logout</a>
         </div>
     </div>
-
-    <!-- Modal untuk menampilkan gambar besar -->
-    <div id="myModal" class="modal" onclick="closeModal()">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-    </div>
-
-    <script>
-        function openModal(src) {
-            const modal = document.getElementById("myModal");
-            const img = document.getElementById("img01");
-            img.src = src;
-            modal.style.display = "flex";
-        }
-
-        function closeModal() {
-            const modal = document.getElementById("myModal");
-            modal.style.display = "none";
-        }
-    </script>
 </body>
 </html>
 
